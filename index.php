@@ -1,82 +1,25 @@
 <?php
 
-class Team
+
+class CoffeMaker
 {
-
-    protected $name;
-    protected $members = [];
-
-    /**
-     * @param $name
-     */
-    public function __construct($name, $members = [])
+    public function brew()
     {
-        $this->name = $name;
-        $this->members = $members;
-    }
-
-    public static function start(...$params)
-    {
-        return new static(...$params);
-    }
-
-
-    public function name()
-    {
-        return $this->name;
-    }
-
-
-    public function members()
-    {
-        return $this->members;
-    }
-
-    public function add($name)
-    {
-        $this->members[] = $name;
-    }
-
-    public function cancel()
-    {
-
-    }
-
-    public function manager()
-    {
-
+        var_dump('Brewing the coffee');
     }
 }
-class Member
+
+
+//"is a"
+class SpecialityCoffeMaker extends CoffeMaker
 {
-    protected $name ;
-
-    /**
-     * @param $name
-     */
-    public function __construct($name)
+    public function brewLatte()
     {
-        $this->name = $name;
+        var_dump('Brewing a latte');
     }
-
-    public function lastViewed ()
-    {
-
-    }
-
-
 }
 
-//$acme = new Team('ACME', ['founder1', 'founder2']);
-$acme =  Team::start('ACME', [
-    new Member('John Doe'),
-    new Member('Jane Doe'),
-]);
 
-$laracasts = new Team('Laracasts');
-$foo = new Team('Foo');
-
-
-var_dump($acme->members());
-
-
+(new CoffeMaker())->brew();
+(new SpecialityCoffeMaker())->brew();
+(new SpecialityCoffeMaker())->brewLatte();
