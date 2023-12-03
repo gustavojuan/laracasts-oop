@@ -1,57 +1,41 @@
 <?php
 
-class Collection
-{
-    protected array $items;
 
-    /**
-     * @param array $items
-     */
-    public function __construct(array $items)
+class AchievementType
+{
+    public function name()
     {
-        $this->items = $items;
+        $class = (new ReflectionClass($this))->getShortName();
+        return trim(preg_replace('/[A-Z]/', ' $0',$class));
     }
 
-
-    public function sum($key)
+    public function icon()
     {
-        return array_sum(array_column($this->items,$key));
+        return  strtolower(str_replace(' ','-',$this->name())).'.png';
     }
 
 }
 
-
-//"is a"
-class VideoCollection extends Collection
+class FirstThousandPoints extends AchievementType
 {
-    public function length()
+    public function qualifier($user)
     {
-        return $this->sum('length');
+
     }
 }
 
-class Video
+class FirstBestAnswer extends AchievementType
 {
-    public $title;
-    public $length;
-
-    /**
-     * @param $title
-     * @param $length
-     */
-    public function __construct($title, $length)
+    public function qualifier($user)
     {
-        $this->title = $title;
-        $this->length = $length;
+
     }
 }
 
+$ftp  = new FirstThousandPoints();
+echo $ftp->name();
+echo $ftp->icon();
 
-$videos = new VideoCollection([
-    new Video('Speed', 110),
-    new Video('Speed 2', 117),
-]);
-
-var_dump($videos->sum('length'));
-var_dump($videos->length());
-
+$fba = new FirstBestAnswer();
+echo $fba->name();
+echo  $fba->icon();
