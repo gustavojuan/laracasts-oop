@@ -1,42 +1,34 @@
 <?php
-
-// Encapsulation => Enclose within a capsule
-
-class Person
+class Tennis
 {
 
+    protected $playerOne;
 
-    public $name;
-
-    public function __construct($name)
+    /** Affordance method */
+    public function score()
     {
-        $this->name = $name;
+        //is there a winner
+
+        //does someone have an advantage
+
+        //are they in deuce
     }
 
-    public function job()
-    {
-        return 'software developer';
-    }
 
-    public function favoriteTeam()
+
+    protected function hasWinner()
     {
 
     }
 
-    private function thingsThatKeepUpAtNight()
+    protected function hasAdvantage()
     {
-        return 'cosas que a lo mejor no todo el mundo debiera saber';
+
     }
+
+    protected function inDeuce()
+    {
+
+    }
+
 }
-
-//$method = new \ReflectionMethod(Person::class,'thingsThatKeepUpAtNight');
-//var_dump($method);
-//$method->setAccessible(1);
-//die();
-//
-//$bob = new Person('Bob');
-//var_dump($bob->thingsThatKeepUpAtNight());
-
-$person = new Person('Bob');
-$person->name = null;
-var_dump($person);
