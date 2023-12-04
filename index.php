@@ -1,57 +1,50 @@
 <?php
-
-class Collection
+abstract class AchievementType
 {
-    protected array $items;
-
-    /**
-     * @param array $items
-     */
-    public function __construct(array $items)
+    public function name()
     {
-        $this->items = $items;
+       $reflection = new ReflectionClass($this);
+       $class = $reflection->getShortName();
+       return trim(preg_replace('/[A-Z]/',' $0',$class));
     }
 
-
-    public function sum($key)
+    public function icon()
     {
-        return array_sum(array_column($this->items,$key));
+        return strtolower(str_replace(' ','-', $this->name()).'.png');
     }
+
+    abstract public function qualifier($user);
+
 
 }
 
-
-//"is a"
-class VideoCollection extends Collection
+class FirstThousandPoints extends AchievementType
 {
-    public function length()
+
+    public function qualifier($user)
     {
-        return $this->sum('length');
+
     }
 }
 
-class Video
+class FirstBestAnswer extends AchievementType
 {
-    public $title;
-    public $length;
-
-    /**
-     * @param $title
-     * @param $length
-     */
-    public function __construct($title, $length)
+    public function qualifier($user)
     {
-        $this->title = $title;
-        $this->length = $length;
+
+    }
+}
+
+class classReachTop50 extends AchievementType {
+    public function qualifier($user)
+    {
+        return "Soy {${$user}}";
     }
 }
 
 
-$videos = new VideoCollection([
-    new Video('Speed', 110),
-    new Video('Speed 2', 117),
-]);
 
-var_dump($videos->sum('length'));
-var_dump($videos->length());
+
+$ftp = new classReachTop50();
+var_dump($ftp->qualifier('user'));
 
