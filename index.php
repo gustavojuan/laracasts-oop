@@ -1,18 +1,40 @@
 <?php
 
-function add ($one, $two)
+class Video
 {
-    if(! is_float($one) || ! is_float($two)){
-        throw new InvalidArgumentException('Please provide a float.');
+
+}
+
+class User
+{
+    public function download(Video $video)
+    {
+        if(!$this->subscribed()) {
+            throw new Exception('You must be susbscribed to download videos');
+        }
     }
-    return $one + $two;
+
+    public function subscribed ()
+    {
+            return false;
+    }
 }
 
 
-try {
-    echo add(2.1, 2);
-}catch (InvalidArgumentException $e) {
-    echo 'Oh well. '. $e->getMessage();
+class UserDownloadsController
+{
+    public function show()
+    {
+
+        try
+        {
+            (new User)->download(new Video);
+        }catch ( Exception $e) {
+            echo "Well". $e->getMessage();
+        }
+
+    }
 }
+
 
 
