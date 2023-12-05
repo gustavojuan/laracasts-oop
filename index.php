@@ -1,105 +1,46 @@
 <?php
 
-class Subscription
+class Age
 {
-    protected Getaway $getaway;
+    private $age;
 
-    public function __construct(Getaway $getaway)
+    /**
+     * @param $age
+     */
+    public function __construct($age)
     {
-        $this->getaway = $getaway;
+
+        if ($age < 0 || $age > 120) {
+            throw new InvalidArgumentException('That makes no sense');
+        }
+
+        $this->age = $age;
     }
 
-    public function create()
+    //Mutable
+    //    public function increment()
+    //    {
+    //        $this->age ++;
+    //    }
+
+    // Inmutable
+    public function increment()
     {
-
-    }
-
-    public function cancel()
-    {
-        //api request
-        // find stripe customer
-        $customer = $this->getaway->findCustomer();
-
-        // find stipe subscription by customer
-        $this->getaway->findSubscriptionByCustomer($customer);
-    }
-
-    public function invoice()
-    {
-
-    }
-
-    public function swap($newPlan)
-    {
-
+        return new self($this->age + 1);
     }
 
 
-    /*INFO: Estos dos métodos en esta clase chirrían*/
-//    protected function findStripeCustomer()
-//    {
-//
-//    }
-//
-//
-//    protected function findStripeSubscriptionByCustomer()
-//    {
-//
-//    }
 
 }
 
-
-//class BillableSubscription extends Subscription
-//{
-//
-//    /*INFO: Estos dos métodos estarían más relacionados con otra clase*/
-//    protected function findStripeCustomer()
-//    {
-//
-//    }
-//
-//
-//    protected function findStripeSubscriptionByCustomer()
-//    {
-//
-//    }
-//}
-
-
-interface Getaway
+function register(string $name, Age $age)
 {
-    public function findCustomer();
 
-    public function findSubscriptionByCustomer();
 }
 
-class StripeGetaway implements Getaway
-{
-    public function findCustomer()
-    {
+$age = new Age(35);
+$age = $age->increment();
 
-    }
+var_dump($age);
 
-    public function findSubscriptionByCustomer()
-    {
-
-    }
-}
-
-class PaypalGetaway implements Getaway
-{
-    public function findCustomer()
-    {
-
-    }
-
-    public function findSubscriptionByCustomer()
-    {
-
-    }
-}
-
-
-$subscription = new Subscription(new StripeGetaway());
-$subscription = new Subscription(new PaypalGetaway());
+register('John Doe', $age);
