@@ -1,25 +1,18 @@
 <?php
 
-class DateSpan
+function add ($one, $two)
 {
-    private $begin;
-    private $end;
-
-    /**
-     * @param $begin
-     * @param $end
-     */
-    public function __construct($begin, $end)
-    {
-        $this->begin = $begin;
-        $this->end = $end;
+    if(! is_float($one) || ! is_float($two)){
+        throw new InvalidArgumentException('Please provide a float.');
     }
-
-
+    return $one + $two;
 }
 
 
-function scheduleVacation($arrive, $depart)
-{
-
+try {
+    echo add(2.1, 2);
+}catch (InvalidArgumentException $e) {
+    echo 'Oh well. '. $e->getMessage();
 }
+
+
