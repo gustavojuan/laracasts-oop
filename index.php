@@ -81,7 +81,6 @@ class StripeGetaway implements Getaway
 
     }
 
-
     public function findSubscriptionByCustomer()
     {
 
@@ -94,7 +93,6 @@ class PaypalGetaway implements Getaway
     {
 
     }
-
 
     public function findSubscriptionByCustomer()
     {
