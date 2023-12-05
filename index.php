@@ -1,11 +1,12 @@
 <?php
+
 class Subscription
 {
-    protected StripeGetaway $stripeGetaway;
+    protected Getaway $getaway;
 
-    public function __construct(StripeGetaway $stripeGetaway)
+    public function __construct(Getaway $getaway)
     {
-        $this->stripeGetaway = $stripeGetaway;
+        $this->getaway = $getaway;
     }
 
     public function create()
@@ -16,11 +17,11 @@ class Subscription
     public function cancel()
     {
         //api request
-            // find stripe customer
-            //$customer = $this->stripeGetaway->findStripeCustomer();
+        // find stripe customer
+        $customer = $this->getaway->findCustomer();
 
-            // find stipe subscription by customer
-            //$this->stripeGetaway->findStripeSubscriptionByCustomer($customer);
+        // find stipe subscription by customer
+        $this->getaway->findSubscriptionByCustomer($customer);
     }
 
     public function invoice()
@@ -28,7 +29,7 @@ class Subscription
 
     }
 
-    public function  swap($newPlan)
+    public function swap($newPlan)
     {
 
     }
@@ -66,16 +67,41 @@ class Subscription
 //}
 
 
-class StripeGetaway
+interface Getaway
 {
-    public function findStripeCustomer()
+    public function findCustomer();
+
+    public function findSubscriptionByCustomer();
+}
+
+class StripeGetaway implements Getaway
+{
+    public function findCustomer()
     {
 
     }
 
 
-    public  function findStripeSubscriptionByCustomer()
+    public function findSubscriptionByCustomer()
     {
 
     }
 }
+
+class PaypalGetaway implements Getaway
+{
+    public function findCustomer()
+    {
+
+    }
+
+
+    public function findSubscriptionByCustomer()
+    {
+
+    }
+}
+
+
+$subscription = new Subscription(new StripeGetaway());
+$subscription = new Subscription(new PaypalGetaway());
