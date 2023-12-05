@@ -1,46 +1,37 @@
 <?php
 
-class Age
+class Coordinates
 {
-    private $age;
+    protected $x;
+    protected $y;
 
     /**
-     * @param $age
+     * @param $x
+     * @param $y
      */
-    public function __construct($age)
+    public function __construct($x, $y)
     {
-
-        if ($age < 0 || $age > 120) {
-            throw new InvalidArgumentException('That makes no sense');
-        }
-
-        $this->age = $age;
+        $this->x = $x;
+        $this->y = $y;
     }
-
-    //Mutable
-    //    public function increment()
-    //    {
-    //        $this->age ++;
-    //    }
-
-    // Inmutable
-    public function increment()
-    {
-        return new self($this->age + 1);
-    }
-
 
 
 }
 
-function register(string $name, Age $age)
+function pin(Coordinates $coordinates)
 {
 
 }
 
-$age = new Age(35);
-$age = $age->increment();
+//coordinate
+function distance(Coordinates $begin, Coordinates $end)
+{
 
-var_dump($age);
+}
 
-register('John Doe', $age);
+
+
+//function register ( FirstName $first,  LastName $last, Age $age, EmailAddress $email, Password $password)
+//{
+//
+//}
