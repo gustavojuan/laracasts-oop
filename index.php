@@ -1,37 +1,25 @@
 <?php
 
-class Coordinates
+class DateSpan
 {
-    protected $x;
-    protected $y;
+    private $begin;
+    private $end;
 
     /**
-     * @param $x
-     * @param $y
+     * @param $begin
+     * @param $end
      */
-    public function __construct($x, $y)
+    public function __construct($begin, $end)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->begin = $begin;
+        $this->end = $end;
     }
 
 
 }
 
-function pin(Coordinates $coordinates)
+
+function scheduleVacation($arrive, $depart)
 {
 
 }
-
-//coordinate
-function distance(Coordinates $begin, Coordinates $end)
-{
-
-}
-
-
-
-//function register ( FirstName $first,  LastName $last, Age $age, EmailAddress $email, Password $password)
-//{
-//
-//}
